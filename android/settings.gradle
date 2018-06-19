@@ -1,0 +1,5 @@
+rootProject.name = 'RNPilgrimSample'
+include ':pilgrim-sdk-react-native'
+project(':pilgrim-sdk-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/pilgrim-sdk-react-native/android')
+
+include ':app'

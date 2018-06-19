@@ -1,0 +1,16 @@
+PODS:
+  - pilgrim-sdk (1.3.2)
+
+DEPENDENCIES:
+  - pilgrim-sdk (~> 1.3.2)
+
+SPEC REPOS:
+  https://foursquare.jfrog.io/foursquare/api/pods/foursquare:
+    - pilgrim-sdk
+
+SPEC CHECKSUMS:
+  pilgrim-sdk: 823060a4edb76cb21f0a595bbf1671e1df178166
+
+PODFILE CHECKSUM: c4fa9e365811ef1829e8e7d95929ffd9e969a7c7
+
+COCOAPODS: 1.5.0
