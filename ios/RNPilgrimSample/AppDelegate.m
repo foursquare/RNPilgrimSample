@@ -9,7 +9,8 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import <RNPilgrimSdk/RNPilgrimSdk.h>
+
+#import <Pilgrim/Pilgrim.h>
 
 @implementation AppDelegate
 
@@ -24,9 +25,12 @@
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
   
-  RNPilgrimSdk *pilgrimModule = [rootView.bridge moduleForClass:[RNPilgrimSdk class]];
-  [pilgrimModule intializeWithKey:@"TMKHTRWRRYO4WIZPVJNHA1Q3JU0YBED5XIONMQTOC00YYCLY"
-                           secret:@"01IYW3XKATTKF40RHUOTFPU0TTFJTJ5QC1IIIXX0NLJDV1FH"];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-pointer-types"
+  [[FSQPPilgrimManager sharedManager] configureWithConsumerKey:@"TMKHTRWRRYO4WIZPVJNHA1Q3JU0YBED5XIONMQTOC00YYCLY"
+                                                        secret:@"01IYW3XKATTKF40RHUOTFPU0TTFJTJ5QC1IIIXX0NLJDV1FH"
+                                                      delegate:self completion:nil];
+#pragma clang diagnostic pop
 
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 

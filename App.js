@@ -5,69 +5,194 @@
  */
 
 import React, { Component } from 'react';
+
 import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
+  AsyncStorage,
   NativeEventEmitter
 } from 'react-native';
+
+import {
+  Body,
+  Button,
+  Content,
+  Container,
+  Footer as FooterNativeBase,
+  FooterTab,
+  Header as HeaderNativeBase,
+  List,
+  ListItem,
+  Text,
+  Title
+ } from 'native-base';
 
 import PilgrimSdk from 'pilgrim-sdk-react-native';
 const PilgrimEventEmitter = new NativeEventEmitter(PilgrimSdk);
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-type Props = {};
-export default class App extends Component<Props> {
+class Header extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
-    );
-  }
-
-  async componentWillMount() {
-    var installId = await PilgrimSdk.getInstallId();
-    console.log("installId " + installId);
-
-    PilgrimEventEmitter.addListener(PilgrimSdk.AuthorizedEvent, () => {
-      PilgrimSdk.start();
-      console.log("DID START");
-    });
-    PilgrimSdk.requestAuthorization();
+      <HeaderNativeBase>
+        <Body>
+          <Title>{this.props.title}</Title>
+        </Body>
+      </HeaderNativeBase>
+    )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+class Visits extends Component {
+  render() {
+    return (
+      <List
+        dataArray={this.props.visits}
+        renderRow={(visit) => 
+          <ListItem>
+            <Content>
+              <Text>{visit.info}</Text>
+            </Content>
+          </ListItem>
+        }/>
+    )
+  }
+}
+
+class Logs extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      debugLogs: []
+    };
+  }
+
+  componentWillMount() {
+    this.loadDebugLogs();
+  }
+
+  render() {
+    return (
+      <List
+        dataArray={this.state.debugLogs}
+        renderRow={(debugLog) => 
+          <ListItem>
+            <Content>
+              <Text>{debugLog.eventDescription}</Text>
+              <Text>{new Date(debugLog.timestamp).toLocaleString()}</Text>
+            </Content>
+          </ListItem>
+        }/>
+    )
+  }
+
+  async loadDebugLogs() {
+    const debugLogs = await PilgrimSdk.getDebugLogs();
+    this.setState({debugLogs: debugLogs});
+  }
+}
+
+class Settings extends Component {
+  render() {
+    return (
+      <List>
+        <ListItem>
+          <Text></Text>
+        </ListItem>
+      </List>
+    )
+  }
+}
+
+class Footer extends Component {
+  render() {
+    return (
+      <FooterNativeBase>
+        <FooterTab>
+          <Button active={this.props.selectedTab==0} onPress={() => this.props.onTabClick(0)}>
+            <Text>Visits</Text>
+          </Button>
+          <Button active={this.props.selectedTab==1} onPress={() => this.props.onTabClick(1)}>
+            <Text>Logs</Text>
+          </Button>
+          <Button active={this.props.selectedTab==2} onPress={() => this.props.onTabClick(2)}>
+            <Text>Settings</Text>
+          </Button>
+        </FooterTab>
+      </FooterNativeBase>
+    )
+  }
+}
+
+export default class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      selectedIndex: 0,
+      visits: []
+    };
+
+    PilgrimSdk.setDebugLoggingEnabled(true);
+  }
+
+  componentWillMount() {
+    PilgrimEventEmitter.addListener(PilgrimSdk.AuthorizedEvent, () => {
+      PilgrimSdk.start();
+    });
+    PilgrimSdk.requestAuthorization();
+
+    PilgrimEventEmitter.addListener(PilgrimSdk.DidVisitEvent, (visit) => {
+      this.saveVisits(visit);
+    });
+
+    this.loadVisits()
+  }
+
+  render() {
+    let title = null;
+    let component = null;
+    if (this.state.selectedIndex == 0) {
+      title = "Visits";
+      component = <Visits visits={this.state.visits} />
+    } else if (this.state.selectedIndex == 1) {
+      title = "Logs";
+      component = <Logs />
+    } else {
+      title = "Settings";
+      component = <Settings />
+    }
+    return (
+      <Container style={{flex: 1}}>
+        <Header title={title} />
+        <Content>{component}</Content>
+        <Footer selectedTab={this.state.selectedIndex} onTabClick={(index) => {
+          if (index == 0) {
+            this.loadVisits()
+          }
+          this.setState({selectedIndex: index})
+        }} />
+      </Container>
+    );
+  }
+
+  async loadVisits() {
+    let visits = await AsyncStorage.getItem('visits');
+    if (visits === null) {
+      visits = [];
+    } else {
+      visits = JSON.parse(visits);
+    }
+    this.setState({visits: visits});
+  }
+
+  async saveVisits(visit) {
+    let visits = await AsyncStorage.getItem('visits');
+    if (visits === null) {
+      visits = [];
+    } else {
+      visits = JSON.parse(visits);
+    }
+    visits.push(visit);
+    await AsyncStorage.setItem('visits', JSON.stringify(visits));
+    this.setState({visits: visits});
+  }
+}
