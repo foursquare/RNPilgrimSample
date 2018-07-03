@@ -18,40 +18,56 @@ import {
   Container,
   Footer as FooterNativeBase,
   FooterTab,
-  Header as HeaderNativeBase,
+  Header,
+  Icon,
+  Left,
   List,
   ListItem,
+  Right,
+  Root,
   Text,
   Title
  } from 'native-base';
 
+ import {
+  StackNavigator
+ } from 'react-navigation';
+
 import PilgrimSdk from 'pilgrim-sdk-react-native';
 const PilgrimEventEmitter = new NativeEventEmitter(PilgrimSdk);
-
-class Header extends Component {
-  render() {
-    return (
-      <HeaderNativeBase>
-        <Body>
-          <Title>{this.props.title}</Title>
-        </Body>
-      </HeaderNativeBase>
-    )
-  }
-}
 
 class Visits extends Component {
   render() {
     return (
-      <List
-        dataArray={this.props.visits}
-        renderRow={(visit) => 
-          <ListItem>
-            <Content>
-              <Text>{visit.info}</Text>
-            </Content>
-          </ListItem>
-        }/>
+      <Container>
+        {/* <Header>
+          <Left />
+          <Body>
+            <Title>Visits</Title>
+          </Body>
+          <Right>
+            <Button transparent onPress={() => {
+              PilgrimSdk.testArrivalVisit();
+            }}>
+              <Icon name='add' />
+            </Button>
+          </Right>
+        </Header> */}
+        <Content>
+          <List
+            dataArray={this.props.visits}
+            renderRow={(visit) => 
+              <ListItem noIndent onPress={() => this.props.onVisitPress(visit)}>
+                <Left>
+                  <Text>{visit.venue.name}</Text>
+                </Left>
+                <Right>
+                  <Icon name='arrow-forward' />
+                </Right>
+              </ListItem>
+          }/>
+        </Content>
+      </Container>
     )
   }
 }
@@ -71,16 +87,27 @@ class Logs extends Component {
 
   render() {
     return (
-      <List
-        dataArray={this.state.debugLogs}
-        renderRow={(debugLog) => 
-          <ListItem>
-            <Content>
-              <Text>{debugLog.eventDescription}</Text>
-              <Text>{new Date(debugLog.timestamp).toLocaleString()}</Text>
-            </Content>
-          </ListItem>
-        }/>
+      <Container>
+        {/* <Header>
+          <Left />
+          <Body>
+            <Title>Logs</Title>
+          </Body>
+          <Right />
+        </Header> */}
+        <Content>
+          <List
+          dataArray={this.state.debugLogs}
+          renderRow={(debugLog) => 
+            <ListItem>
+              <Content>
+                <Text>{debugLog.eventDescription}</Text>
+                <Text>{new Date(debugLog.timestamp).toLocaleString()}</Text>
+              </Content>
+            </ListItem>
+          }/>
+        </Content>
+      </Container>
     )
   }
 
@@ -93,11 +120,51 @@ class Logs extends Component {
 class Settings extends Component {
   render() {
     return (
-      <List>
-        <ListItem>
-          <Text></Text>
-        </ListItem>
-      </List>
+      <Container>
+        {/* <Header>
+          <Left />
+          <Body>
+            <Title>Settings</Title>
+          </Body>
+          <Right />
+        </Header> */}
+        <Content>
+          <List>
+            <ListItem>
+              <Text></Text>
+            </ListItem>
+          </List>
+        </Content>
+      </Container> 
+    )
+  }
+}
+
+class VisitDetailsScreen extends Component {
+  render() {
+    var visit = this.props.navigation.getParam('visit', null);
+    var location = visit.venue.location;
+    console.log(visit);
+    return (
+      <Container>
+        {/* <Header>
+          <Left />
+          <Body>
+            <Title>Visit Details</Title>
+          </Body>
+          <Right />
+        </Header> */}
+        <Content>
+          <List>
+            <ListItem>
+              <Text>{visit.venue.name}</Text>
+            </ListItem>
+            <ListItem>
+              <Text>{location.address} {location.city}, {location.state} {location.postalCode}</Text>
+            </ListItem>
+          </List>
+        </Content>
+      </Container> 
     )
   }
 }
@@ -110,19 +177,19 @@ class Footer extends Component {
           <Button active={this.props.selectedTab==0} onPress={() => this.props.onTabClick(0)}>
             <Text>Visits</Text>
           </Button>
-          <Button active={this.props.selectedTab==1} onPress={() => this.props.onTabClick(1)}>
+          {/* <Button active={this.props.selectedTab==1} onPress={() => this.props.onTabClick(1)}>
             <Text>Logs</Text>
-          </Button>
-          <Button active={this.props.selectedTab==2} onPress={() => this.props.onTabClick(2)}>
+          </Button> */}
+          {/* <Button active={this.props.selectedTab==2} onPress={() => this.props.onTabClick(2)}>
             <Text>Settings</Text>
-          </Button>
+          </Button> */}
         </FooterTab>
       </FooterNativeBase>
     )
   }
 }
 
-export default class App extends Component {
+class HomeScreen extends Component {
   constructor(props) {
     super(props)
 
@@ -148,22 +215,19 @@ export default class App extends Component {
   }
 
   render() {
-    let title = null;
     let component = null;
     if (this.state.selectedIndex == 0) {
-      title = "Visits";
-      component = <Visits visits={this.state.visits} />
+      component = <Visits visits={this.state.visits} onVisitPress={(visit) => {
+        this.props.navigation.navigate('VisitDetails', {'visit':visit})
+      }} />
     } else if (this.state.selectedIndex == 1) {
-      title = "Logs";
       component = <Logs />
     } else {
-      title = "Settings";
       component = <Settings />
     }
     return (
       <Container style={{flex: 1}}>
-        <Header title={title} />
-        <Content>{component}</Content>
+        {component}
         <Footer selectedTab={this.state.selectedIndex} onTabClick={(index) => {
           if (index == 0) {
             this.loadVisits()
@@ -196,3 +260,18 @@ export default class App extends Component {
     this.setState({visits: visits});
   }
 }
+
+const AppNavigator = StackNavigator(
+  {
+    Home: HomeScreen,
+    VisitDetails: VisitDetailsScreen,
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+export default () =>
+  <Root>
+    <AppNavigator />
+  </Root>;
