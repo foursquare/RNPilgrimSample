@@ -7,203 +7,76 @@
 import React, { Component } from 'react';
 
 import {
+  Alert,
   AsyncStorage,
+  Button,
   NativeEventEmitter
 } from 'react-native';
 
 import {
-  Body,
-  Button,
+  ActionSheet,
   Content,
   Container,
-  Footer as FooterNativeBase,
-  FooterTab,
-  Header,
   Icon,
   Left,
   List,
   ListItem,
   Right,
   Root,
-  Text,
-  Title
+  Text
  } from 'native-base';
 
  import {
-  StackNavigator
+  createStackNavigator,
+  createBottomTabNavigator
  } from 'react-navigation';
 
 import PilgrimSdk from 'pilgrim-sdk-react-native';
 const PilgrimEventEmitter = new NativeEventEmitter(PilgrimSdk);
 
-class Visits extends Component {
-  render() {
-    return (
-      <Container>
-        {/* <Header>
-          <Left />
-          <Body>
-            <Title>Visits</Title>
-          </Body>
-          <Right>
-            <Button transparent onPress={() => {
-              PilgrimSdk.testArrivalVisit();
-            }}>
-              <Icon name='add' />
-            </Button>
-          </Right>
-        </Header> */}
-        <Content>
-          <List
-            dataArray={this.props.visits}
-            renderRow={(visit) => 
-              <ListItem noIndent onPress={() => this.props.onVisitPress(visit)}>
-                <Left>
-                  <Text>{visit.venue.name}</Text>
-                </Left>
-                <Right>
-                  <Icon name='arrow-forward' />
-                </Right>
-              </ListItem>
-          }/>
-        </Content>
-      </Container>
-    )
-  }
-}
+class VisitsScreen extends Component {
+  static navigationOptions = {
+    title: 'Visits',
+    headerRight: (
+      <Button
+        onPress={() => 
+          ActionSheet.show(
+            {
+              options: ["Arrival", "Departure", "Cancel"],
+              cancelButtonIndex: 2,
+              title: "Select Visit Type"
+            },
+            buttonIndex => {
+              if (buttonIndex == 0) {
+                PilgrimSdk.testVenueVisit(false);
+              } else if (buttonIndex == 1) {
+                PilgrimSdk.testVenueVisit(true);
+              }
+            }
+          )}
+        title="Test Visit"
+      />
+    ),
+  };
 
-class Logs extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      debugLogs: []
-    };
-  }
-
-  componentWillMount() {
-    this.loadDebugLogs();
-  }
-
-  render() {
-    return (
-      <Container>
-        {/* <Header>
-          <Left />
-          <Body>
-            <Title>Logs</Title>
-          </Body>
-          <Right />
-        </Header> */}
-        <Content>
-          <List
-          dataArray={this.state.debugLogs}
-          renderRow={(debugLog) => 
-            <ListItem>
-              <Content>
-                <Text>{debugLog.eventDescription}</Text>
-                <Text>{new Date(debugLog.timestamp).toLocaleString()}</Text>
-              </Content>
-            </ListItem>
-          }/>
-        </Content>
-      </Container>
-    )
-  }
-
-  async loadDebugLogs() {
-    const debugLogs = await PilgrimSdk.getDebugLogs();
-    this.setState({debugLogs: debugLogs});
-  }
-}
-
-class Settings extends Component {
-  render() {
-    return (
-      <Container>
-        {/* <Header>
-          <Left />
-          <Body>
-            <Title>Settings</Title>
-          </Body>
-          <Right />
-        </Header> */}
-        <Content>
-          <List>
-            <ListItem>
-              <Text></Text>
-            </ListItem>
-          </List>
-        </Content>
-      </Container> 
-    )
-  }
-}
-
-class VisitDetailsScreen extends Component {
-  render() {
-    var visit = this.props.navigation.getParam('visit', null);
-    var location = visit.venue.location;
-    console.log(visit);
-    return (
-      <Container>
-        {/* <Header>
-          <Left />
-          <Body>
-            <Title>Visit Details</Title>
-          </Body>
-          <Right />
-        </Header> */}
-        <Content>
-          <List>
-            <ListItem>
-              <Text>{visit.venue.name}</Text>
-            </ListItem>
-            <ListItem>
-              <Text>{location.address} {location.city}, {location.state} {location.postalCode}</Text>
-            </ListItem>
-          </List>
-        </Content>
-      </Container> 
-    )
-  }
-}
-
-class Footer extends Component {
-  render() {
-    return (
-      <FooterNativeBase>
-        <FooterTab>
-          <Button active={this.props.selectedTab==0} onPress={() => this.props.onTabClick(0)}>
-            <Text>Visits</Text>
-          </Button>
-          {/* <Button active={this.props.selectedTab==1} onPress={() => this.props.onTabClick(1)}>
-            <Text>Logs</Text>
-          </Button> */}
-          {/* <Button active={this.props.selectedTab==2} onPress={() => this.props.onTabClick(2)}>
-            <Text>Settings</Text>
-          </Button> */}
-        </FooterTab>
-      </FooterNativeBase>
-    )
-  }
-}
-
-class HomeScreen extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      selectedIndex: 0,
       visits: []
     };
-
-    PilgrimSdk.setDebugLoggingEnabled(true);
   }
 
   componentWillMount() {
-    PilgrimEventEmitter.addListener(PilgrimSdk.AuthorizedEvent, () => {
-      PilgrimSdk.start();
+    PilgrimEventEmitter.addListener(PilgrimSdk.AuthorizedEvent, (authorized) => {
+      if (authorized) {
+        PilgrimSdk.start();
+      } else {
+        Alert.alert(
+          'Location Permission Required',
+          'Sample app requires location'
+        );
+      }
     });
     PilgrimSdk.requestAuthorization();
 
@@ -213,29 +86,26 @@ class HomeScreen extends Component {
 
     this.loadVisits()
   }
-
+  
   render() {
-    let component = null;
-    if (this.state.selectedIndex == 0) {
-      component = <Visits visits={this.state.visits} onVisitPress={(visit) => {
-        this.props.navigation.navigate('VisitDetails', {'visit':visit})
-      }} />
-    } else if (this.state.selectedIndex == 1) {
-      component = <Logs />
-    } else {
-      component = <Settings />
-    }
     return (
-      <Container style={{flex: 1}}>
-        {component}
-        <Footer selectedTab={this.state.selectedIndex} onTabClick={(index) => {
-          if (index == 0) {
-            this.loadVisits()
-          }
-          this.setState({selectedIndex: index})
-        }} />
+      <Container>
+        <Content>
+          <List
+            dataArray={this.state.visits}
+            renderRow={(visit) => 
+              <ListItem noIndent onPress={() => this.props.navigation.navigate('VisitDetails', {'visit':visit})}>
+                <Left>
+                  <Text>{visit.isArrival ? "Arrival @ " : "Departure @ "}{visit.venue.name}</Text>
+                </Left>
+                <Right>
+                  <Icon name='arrow-forward' />
+                </Right>
+              </ListItem>
+          }/>
+        </Content>
       </Container>
-    );
+    )
   }
 
   async loadVisits() {
@@ -261,17 +131,79 @@ class HomeScreen extends Component {
   }
 }
 
-const AppNavigator = StackNavigator(
+class VisitDetailsScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('visit', null).venue.name,
+    };
+  };
+
+  render() {
+    var visit = this.props.navigation.getParam('visit', null);
+    var location = visit.venue.location;
+    var addressComponent = <Text>No Address Info</Text>
+    if (location.address != null) {
+      addressComponent = <Text>{location.address} {location.city}, {location.state} {location.postalCode}</Text>
+    }
+    return (
+      <Container>
+        <Content>
+          <List>
+            <ListItem>
+              {addressComponent}
+            </ListItem>
+            <ListItem>
+              <Text>Lat: {location.lat} Lng: {location.lng}</Text>
+            </ListItem>
+          </List>
+        </Content>
+      </Container> 
+    )
+  }
+}
+
+class SettingsScreen extends Component {
+  static navigationOptions = {
+    title: 'Settings',
+  };
+
+  render() {
+    return (
+      <Container>
+        <Content>
+          <List>
+            <ListItem>
+              <Text></Text>
+            </ListItem>
+          </List>
+        </Content>
+      </Container> 
+    )
+  }
+}
+
+const VisitsNavigator = createStackNavigator(
   {
-    Home: HomeScreen,
+    Visits: VisitsScreen,
     VisitDetails: VisitDetailsScreen,
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Visits',
   }
 );
 
+const SettingsNavigator = createStackNavigator(
+  {
+    Settings: SettingsScreen
+  }
+);
+
+const TabNavigator = createBottomTabNavigator({
+  Visits: VisitsNavigator,
+  Settings: SettingsNavigator
+});
+
 export default () =>
   <Root>
-    <AppNavigator />
+    <TabNavigator />
   </Root>;
