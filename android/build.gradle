@@ -34,5 +34,6 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven { url 'https://foursquare.jfrog.io/foursquare/libs-release/' }
     }
 }
