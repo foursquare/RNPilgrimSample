@@ -13,6 +13,48 @@ import Geolocation from '@react-native-community/geolocation';
 import PilgrimSdk from 'pilgrim-sdk-react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import MapView from 'react-native-maps';
+
+class GetCurrentLocationScreen extends Component {
+  static navigationOptions = {
+    title: 'Get Current Location'
+  };
+
+  state = {
+    latitude: 0.0,
+    longitude: 0.0
+  };
+
+  getCurrentLocation = async function () {
+    try {
+      const currentLocation = await PilgrimSdk.getCurrentLocation();
+      this.setState({
+        latitude: currentLocation.currentPlace.location.latitude,
+        longitude: currentLocation.currentPlace.location.longitude
+      });
+    } catch (e) {
+      Alert.alert("Pilgrim SDK", `${e}`);
+    }
+  }
+
+  componentDidMount() {
+    this.getCurrentLocation();
+  }
+
+  render() {
+    return (
+      <>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView style={{ flex: 1 }}>
+          <MapView style={{ flex: 1 }} region={{ latitude: this.state.latitude, longitude: this.state.longitude, latitudeDelta: 0.01, longitudeDelta: 0.01 }} />
+          <View style={{ flex: 1 }} >
+
+          </View>
+        </SafeAreaView>
+      </>
+    );
+  }
+}
 
 class HomeScreen extends Component {
   static navigationOptions = {
@@ -20,7 +62,7 @@ class HomeScreen extends Component {
   };
 
   state = {
-    installId: "-"
+    installId: "-",
   };
 
   componentDidMount() {
@@ -28,15 +70,6 @@ class HomeScreen extends Component {
     PilgrimSdk.getInstallId().then(installId => {
       this.setState({ installId: installId });
     });
-  }
-
-  getCurrentLocation = async function () {
-    try {
-      const currentLocation = await PilgrimSdk.getCurrentLocation();
-      Alert.alert("Pilgrim SDK", `${currentLocation.currentPlace.venue.name}`);
-    } catch (e) {
-      Alert.alert("Pilgrim SDK", `${e}`);
-    }
   }
 
   fireTestVisit = function () {
@@ -67,12 +100,13 @@ class HomeScreen extends Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={{ flex: 1 }}>
           <ScrollView style={styles.container}>
-            <Button title="Get Current Location" onPress={() => { this.getCurrentLocation(); }} />
+            <Button title="Get Current Location" onPress={() => { navigate('GetCurrentLocation') }} />
             <View style={styles.separator} />
             <Button title="Fire Test Visit" onPress={() => { this.fireTestVisit(); }} />
             <View style={styles.separator} />
@@ -89,7 +123,8 @@ class HomeScreen extends Component {
 };
 
 const MainNavigator = createStackNavigator({
-  Home: { screen: HomeScreen }
+  Home: { screen: HomeScreen },
+  GetCurrentLocation: { screen: GetCurrentLocationScreen }
 });
 
 const App = createAppContainer(MainNavigator);
