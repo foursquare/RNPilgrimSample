@@ -1,34 +1,18 @@
 import React, { Component } from 'react';
 import {
+  Alert,
   Button,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   StatusBar,
   Text,
+  View
 } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import PilgrimSdk from 'pilgrim-sdk-react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-
-async function getCurrentLocation() {
-  try {
-    const venue = await PilgrimSdk.getCurrentLocation();
-    console.log(venue);
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-async function fireTestVisit() {
-  Geolocation.getCurrentPosition(position => {
-    PilgrimSdk.fireTestVisit(position.coords.latitude, position.coords.longitude);
-    console.log('Sent test visit');
-  }, error => {
-    console.log(e);
-  });
-}
 
 class HomeScreen extends Component {
   static navigationOptions = {
@@ -41,10 +25,45 @@ class HomeScreen extends Component {
 
   componentDidMount() {
     Geolocation.requestAuthorization();
-
     PilgrimSdk.getInstallId().then(installId => {
       this.setState({ installId: installId });
     });
+  }
+
+  getCurrentLocation = async function () {
+    try {
+      const currentLocation = await PilgrimSdk.getCurrentLocation();
+      Alert.alert("Pilgrim SDK", `${currentLocation.currentPlace.venue.name}`);
+    } catch (e) {
+      Alert.alert("Pilgrim SDK", `${e}`);
+    }
+  }
+
+  fireTestVisit = function () {
+    Geolocation.getCurrentPosition(position => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      PilgrimSdk.fireTestVisit(latitude, longitude);
+      Alert.alert("Pilgrim SDK", `Sent test visit with location: (${latitude},${longitude})`);
+    }, error => {
+      Alert.alert("Pilgrim SDK", `${error.message}`);
+    });
+  }
+
+  startPilgrim = async function () {
+    const canEnable = await PilgrimSdk.canEnable();
+    const isSupportedDevice = await PilgrimSdk.isSupportedDevice();
+    if (canEnable && isSupportedDevice) {
+      PilgrimSdk.start();
+      Alert.alert("Pilrim SDK", "Pilgrim started");
+    } else {
+      Alert.alert("Pilrim SDK", "Error starting");
+    }
+  }
+
+  stopPilgrim = function () {
+    PilgrimSdk.stop();
+    Alert.alert("Pilrim SDK", "Pilgrim stopped");
   }
 
   render() {
@@ -53,9 +72,15 @@ class HomeScreen extends Component {
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={{ flex: 1 }}>
           <ScrollView style={styles.container}>
-            <Text style={styles.item}>{this.state.installId}</Text>
-            <Button style={styles.item} title="Get Current Location" onPress={() => { getCurrentLocation(); }} />
-            <Button style={styles.item} title="Fire Test Visit" onPress={() => { fireTestVisit(); }} />
+            <Button title="Get Current Location" onPress={() => { this.getCurrentLocation(); }} />
+            <View style={styles.separator} />
+            <Button title="Fire Test Visit" onPress={() => { this.fireTestVisit(); }} />
+            <View style={styles.separator} />
+            <Button title="Start" onPress={() => { this.startPilgrim(); }} />
+            <View style={styles.separator} />
+            <Button title="Stop" onPress={() => { this.stopPilgrim(); }} />
+            <View style={styles.separator} />
+            <Text style={styles.label}>Install ID: {this.state.installId}</Text>
           </ScrollView>
         </SafeAreaView>
       </>
@@ -75,10 +100,12 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20
   },
-  item: {
+  label: {
     textAlign: "center",
-    padding: 10,
-    fontSize: 18,
-    height: 44,
+    padding: 20,
+    fontSize: 13
+  },
+  separator: {
+    height: 20
   }
 });
