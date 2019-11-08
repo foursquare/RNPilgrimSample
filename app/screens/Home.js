@@ -12,22 +12,7 @@ import {
 import RNLocation from 'react-native-location';
 import PilgrimSdk from 'pilgrim-sdk-react-native';
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: 20
-    },
-    label: {
-        textAlign: "center",
-        padding: 20,
-        fontSize: 13
-    },
-    separator: {
-        height: 20
-    }
-});
-
-class HomeScreen extends Component {
+export default class HomeScreen extends Component {
     static navigationOptions = {
         title: 'Pilgrim React Native Sample'
     };
@@ -85,21 +70,33 @@ class HomeScreen extends Component {
         return (
             <>
                 <StatusBar barStyle="dark-content" />
-                <SafeAreaView style={{ flex: 1 }}>
-                    <ScrollView style={styles.container}>
-                        <Button title="Get Current Location" onPress={() => { navigate('GetCurrentLocation') }} />
-                        <View style={styles.separator} />
-                        <Button title="Fire Test Visit" onPress={() => { this.fireTestVisit(); }} />
-                        <View style={styles.separator} />
-                        <Button title="Start" onPress={() => { this.startPilgrim(); }} />
-                        <View style={styles.separator} />
-                        <Button title="Stop" onPress={() => { this.stopPilgrim(); }} />
-                        <View style={styles.separator} />
-                        <Text style={styles.label}>Install ID: {this.state.installId}</Text>
-                    </ScrollView>
-                </SafeAreaView>
+                <ScrollView style={styles.container}>
+                    <Button title="Get Current Location" onPress={() => { navigate('GetCurrentLocation') }} />
+                    <View style={styles.separator} />
+                    <Button title="Fire Test Visit" onPress={() => { this.fireTestVisit(); }} />
+                    <View style={styles.separator} />
+                    <Button title="Start" onPress={() => { this.startPilgrim(); }} />
+                    <View style={styles.separator} />
+                    <Button title="Stop" onPress={() => { this.stopPilgrim(); }} />
+                    <View style={styles.separator} />
+                    <Text style={styles.installId}>Install ID: {this.state.installId}</Text>
+                </ScrollView>
             </>
         );
     }
 };
-export default HomeScreen;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 20
+    },
+    installId: {
+        textAlign: "center",
+        padding: 20,
+        fontSize: 13
+    },
+    separator: {
+        height: 20
+    }
+});
