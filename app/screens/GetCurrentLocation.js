@@ -17,16 +17,27 @@ function Item({ geofenceEvent }) {
     const locationInformation = venue.locationInformation;
     const category = venue.categories[0];
     const icon = category.icon.prefix + "88" + category.icon.suffix;
-    return (
-        <View>
-            <View style={{ flexDirection: "row" }}>
-                <Image style={{ width: 25, height: 25, backgroundColor: "#CCC", marginRight: 5 }} source={{ uri: icon }} />
-                <Text style={styles.geofenceTitle}>{geofenceEvent.name}</Text>
+    if (locationInformation !== undefined) {
+        return (
+            <View>
+                <View style={{ flexDirection: "row" }}>
+                    <Image style={{ width: 25, height: 25, backgroundColor: "#CCC", marginRight: 5 }} source={{ uri: icon }} />
+                    <Text style={styles.geofenceTitle}>{geofenceEvent.name}</Text>
+                </View>
+                <Text style={styles.geofenceData}>{locationInformation.address}</Text>
+                <Text style={styles.geofenceData}>{locationInformation.city}, {locationInformation.state} {locationInformation.postalCode}</Text>
             </View>
-            <Text style={styles.geofenceData}>{locationInformation.address}</Text>
-            <Text style={styles.geofenceData}>{locationInformation.city}, {locationInformation.state} {locationInformation.postalCode}</Text>
-        </View>
-    );
+        );
+    } else {
+        return (
+            <View>
+                <View style={{ flexDirection: "row" }}>
+                    <Image style={{ width: 25, height: 25, backgroundColor: "#CCC", marginRight: 5 }} source={{ uri: icon }} />
+                    <Text style={styles.geofenceTitle}>{geofenceEvent.name}</Text>
+                </View>
+            </View>
+        );
+    }
 }
 
 export default class GetCurrentLocationScreen extends Component {
@@ -41,11 +52,7 @@ export default class GetCurrentLocationScreen extends Component {
     getCurrentLocation = async function () {
         try {
             const currentLocation = await PilgrimSdk.getCurrentLocation();
-            this.setState({
-                latitude: currentLocation.currentPlace.location.latitude,
-                longitude: currentLocation.currentPlace.location.longitude,
-                currentLocation: currentLocation
-            });
+            this.setState({ currentLocation: currentLocation });
         } catch (e) {
             Alert.alert("Pilgrim SDK", `${e}`);
         }
@@ -78,31 +85,54 @@ export default class GetCurrentLocationScreen extends Component {
             const matchedGeofences = currentLocation.matchedGeofences;
 
             currentLocationMapView = (
-                <MapView style={{ flex: 1 }} region={{ latitude: locationInformation.location.latitude, longitude: locationInformation.location.longitude, latitudeDelta: 0.01, longitudeDelta: 0.01 }}>
-                    <Marker coordinate={locationInformation.location} />
+                <MapView style={{ flex: 1 }} region={{ latitude: visit.location.latitude, longitude: visit.location.longitude, latitudeDelta: 0.01, longitudeDelta: 0.01 }}>
+                    <Marker coordinate={visit.location} />
                 </MapView>
             );
-            currentLocationDataView = (
-                <View style={{ flex: 1 }}>
-                    <View style={{ paddingVertical: 20 }}>
-                        <View style={{ flexDirection: "row" }}>
-                            <Image style={{ width: 50, height: 50, backgroundColor: "#CCC", marginRight: 10 }} source={{ uri: icon }} />
-                            <Text style={styles.title}>{venue.name || "Unknown Venue"}</Text>
-                        </View>
-                        <Text style={styles.venueData}>{locationInformation.address}</Text>
-                        <Text style={styles.venueData}>{locationInformation.city}, {locationInformation.state} {locationInformation.postalCode}</Text>
-                        <Text style={styles.venueData}>Confidence: {this.confidenceString(visit.confidence)}</Text>
-                    </View>
+            if (locationInformation !== undefined) {
+                currentLocationDataView = (
                     <View style={{ flex: 1 }}>
-                        <Text style={styles.title}>Matched Geofences:</Text>
-                        <FlatList
-                            data={matchedGeofences}
-                            renderItem={({ item }) => <Item geofenceEvent={item} />}
-                            keyExtractor={item => item.id}
-                        />
+                        <View style={{ paddingVertical: 20 }}>
+                            <View style={{ flexDirection: "row" }}>
+                                <Image style={{ width: 50, height: 50, backgroundColor: "#CCC", marginRight: 10 }} source={{ uri: icon }} />
+                                <Text style={styles.title}>{venue.name || "Unknown Venue"}</Text>
+                            </View>
+                            <Text style={styles.venueData}>{locationInformation.address}</Text>
+                            <Text style={styles.venueData}>{locationInformation.city}, {locationInformation.state} {locationInformation.postalCode}</Text>
+                            <Text style={styles.venueData}>Confidence: {this.confidenceString(visit.confidence)}</Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                            <Text style={styles.title}>Matched Geofences:</Text>
+                            <FlatList
+                                data={matchedGeofences}
+                                renderItem={({ item }) => <Item geofenceEvent={item} />}
+                                keyExtractor={item => item.id}
+                            />
+                        </View>
                     </View>
-                </View>
-            );
+                );
+            } else {
+                currentLocationDataView = (
+                    <View style={{ flex: 1 }}>
+                        <View style={{ paddingVertical: 20 }}>
+                            <View style={{ flexDirection: "row" }}>
+                                <Image style={{ width: 50, height: 50, backgroundColor: "#CCC", marginRight: 10 }} source={{ uri: icon }} />
+                                <Text style={styles.title}>{venue.name || "Unknown Venue"}</Text>
+                            </View>
+                            <Text style={styles.venueData}>Confidence: {this.confidenceString(visit.confidence)}</Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                            <Text style={styles.title}>Matched Geofences:</Text>
+                            <FlatList
+                                data={matchedGeofences}
+                                renderItem={({ item }) => <Item geofenceEvent={item} />}
+                                keyExtractor={item => item.id}
+                            />
+                        </View>
+                    </View>
+                );
+            }
+
         } else {
             currentLocationMapView = (
                 <MapView style={{ flex: 1 }} />
