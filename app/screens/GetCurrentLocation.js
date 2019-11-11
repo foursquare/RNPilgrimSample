@@ -14,10 +14,10 @@ import MapView, { Marker } from 'react-native-maps';
 
 function Item({ geofenceEvent }) {
     const venue = geofenceEvent.venue;
-    const locationInformation = venue.locationInformation;
-    const category = venue.categories[0];
-    const icon = category.icon.prefix + "88" + category.icon.suffix;
-    if (locationInformation !== undefined) {
+    if (venue !== undefined) {
+        const locationInformation = venue.locationInformation;
+        const category = venue.categories[0];
+        const icon = category.icon.prefix + "88" + category.icon.suffix;
         return (
             <View>
                 <View style={{ flexDirection: "row" }}>
@@ -32,7 +32,6 @@ function Item({ geofenceEvent }) {
         return (
             <View>
                 <View style={{ flexDirection: "row" }}>
-                    <Image style={{ width: 25, height: 25, backgroundColor: "#CCC", marginRight: 5 }} source={{ uri: icon }} />
                     <Text style={styles.geofenceTitle}>{geofenceEvent.name}</Text>
                 </View>
             </View>
@@ -67,6 +66,15 @@ export default class GetCurrentLocationScreen extends Component {
         }
     }
 
+    locationTypeString = function (locationType) {
+        switch (locationType) {
+            case 0: return "Unknown";
+            case 1: return "Home";
+            case 2: return "Work";
+            case 3: return "Venue";
+        }
+    }
+
     componentDidMount() {
         this.getCurrentLocation();
     }
@@ -79,9 +87,6 @@ export default class GetCurrentLocationScreen extends Component {
         if (currentLocation !== null) {
             const visit = currentLocation.currentPlace;
             const venue = visit.venue;
-            const locationInformation = venue.locationInformation;
-            const category = venue.categories[0];
-            const icon = category.icon.prefix + "88" + category.icon.suffix;
             const matchedGeofences = currentLocation.matchedGeofences;
 
             currentLocationMapView = (
@@ -89,7 +94,11 @@ export default class GetCurrentLocationScreen extends Component {
                     <Marker coordinate={visit.location} />
                 </MapView>
             );
-            if (locationInformation !== undefined) {
+
+            if (venue !== undefined) {
+                const locationInformation = venue.locationInformation;
+                const category = venue.categories[0];
+                const icon = category.icon.prefix + "88" + category.icon.suffix;
                 currentLocationDataView = (
                     <View style={{ flex: 1 }}>
                         <View style={{ paddingVertical: 20 }}>
@@ -116,8 +125,7 @@ export default class GetCurrentLocationScreen extends Component {
                     <View style={{ flex: 1 }}>
                         <View style={{ paddingVertical: 20 }}>
                             <View style={{ flexDirection: "row" }}>
-                                <Image style={{ width: 50, height: 50, backgroundColor: "#CCC", marginRight: 10 }} source={{ uri: icon }} />
-                                <Text style={styles.title}>{venue.name || "Unknown Venue"}</Text>
+                                <Text style={styles.title}>{this.locationTypeString(visit.locationType)}</Text>
                             </View>
                             <Text style={styles.venueData}>Confidence: {this.confidenceString(visit.confidence)}</Text>
                         </View>
