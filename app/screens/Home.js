@@ -10,7 +10,7 @@ import {
     View
 } from 'react-native';
 import RNLocation from 'react-native-location';
-import PilgrimSdk from 'pilgrim-sdk-react-native';
+import PilgrimSdk from '@foursquare/pilgrim-sdk-react-native';
 
 export default class HomeScreen extends Component {
     static navigationOptions = {

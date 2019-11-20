@@ -235,7 +235,7 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - pilgrim-sdk-react-native (from `../node_modules/pilgrim-sdk-react-native`)
+  - "pilgrim-sdk-react-native (from `../node_modules/@foursquare/pilgrim-sdk-react-native`)"
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -280,7 +280,7 @@ EXTERNAL SOURCES:
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   pilgrim-sdk-react-native:
-    :path: "../node_modules/pilgrim-sdk-react-native"
+    :path: "../node_modules/@foursquare/pilgrim-sdk-react-native"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -336,7 +336,7 @@ SPEC CHECKSUMS:
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   Pilgrim: cd4d1f639618ac6e73e094848e83ef7d74cad645
-  pilgrim-sdk-react-native: 9f82d86077c5ba2cb050bb3bc6477ea9bd2ddf1d
+  pilgrim-sdk-react-native: a370c9176307789d43327a54bd56371cc4e9dbff
   RCTRequired: f3b3fb6f4723e8e52facb229d0c75fdc76773849
   RCTTypeSafety: 2ec60de6abb1db050b56ecc4b60188026078fd10
   React: 10e0130b57e55a7cd8c3dee37c1261102ce295f4

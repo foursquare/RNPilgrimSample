@@ -9,7 +9,7 @@ import {
     Text,
     View
 } from 'react-native';
-import PilgrimSdk from 'pilgrim-sdk-react-native';
+import PilgrimSdk from '@foursquare/pilgrim-sdk-react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 function Item({ geofenceEvent }) {
