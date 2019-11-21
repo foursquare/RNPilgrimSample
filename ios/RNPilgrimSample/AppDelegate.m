@@ -16,8 +16,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [[FSQPPilgrimManager sharedManager] configureWithConsumerKey:@""
-                                                        secret:@""
+  [[FSQPPilgrimManager sharedManager] configureWithConsumerKey:@"CONSUMER_KEY"
+                                                        secret:@"CONSUMER_SECRET"
                                                       delegate:nil
                                                     completion:nil];
 
