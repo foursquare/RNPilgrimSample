@@ -2,7 +2,7 @@
 Pilgrim sample app using React Native
 
 |iOS                |Android                |
-|-------------------|----------------------:|
+|-------------------|-----------------------|
 |![](images/ios.gif)|![](images/android.gif)|
 
 ## Setup instructions
