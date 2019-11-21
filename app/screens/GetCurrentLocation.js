@@ -46,7 +46,7 @@ export default class GetCurrentLocationScreen extends Component {
 
     state = {
         currentLocation: null
-    }
+    };
 
     getCurrentLocation = async function () {
         try {
@@ -84,7 +84,7 @@ export default class GetCurrentLocationScreen extends Component {
         let currentLocationMapView;
         let currentLocationDataView;
 
-        if (currentLocation !== null) {
+        if (currentLocation != null) {
             const visit = currentLocation.currentPlace;
             const venue = visit.venue;
             const matchedGeofences = currentLocation.matchedGeofences;
@@ -95,7 +95,7 @@ export default class GetCurrentLocationScreen extends Component {
                 </MapView>
             );
 
-            if (venue !== undefined) {
+            if (venue != undefined) {
                 const locationInformation = venue.locationInformation;
                 const category = venue.categories[0];
                 const icon = category.icon.prefix + "88" + category.icon.suffix;

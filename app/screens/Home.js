@@ -65,6 +65,10 @@ export default class HomeScreen extends Component {
         Alert.alert("Pilrim SDK", "Pilgrim stopped");
     }
 
+    showDebugScreen = function () {
+        PilgrimSdk.showDebugScreen();
+    }
+
     render() {
         const { navigate } = this.props.navigation;
         return (
@@ -78,6 +82,8 @@ export default class HomeScreen extends Component {
                     <Button title="Start" onPress={() => { this.startPilgrim(); }} />
                     <View style={styles.separator} />
                     <Button title="Stop" onPress={() => { this.stopPilgrim(); }} />
+                    <View style={styles.separator} />
+                    <Button title="Show Debug Screen" onPress={() => { this.showDebugScreen(); }} />
                     <View style={styles.separator} />
                     <Text style={styles.installId}>Install ID: {this.state.installId}</Text>
                 </ScrollView>

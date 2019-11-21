@@ -10,10 +10,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@foursquare/pilgrim-sdk-react-native": "^1.0.0",
+    "@foursquare/pilgrim-sdk-react-native": "^1.0.4",
     "react": "16.9.0",
     "react-native": "0.61.4",
-    "react-native-gesture-handler": "^1.5.0",
+    "react-native-gesture-handler": "^1.5.1",
     "react-native-location": "^2.5.0",
     "react-native-maps": "git+https://git@github.com/react-native-community/react-native-maps.git",
     "react-navigation": "^4.0.10",
