@@ -8,13 +8,16 @@ Pilgrim sample app using React Native
 ## Setup instructions
 
 1. Clone or download sample app
-    * `git clone git@github.com:foursquare/RNPilgrimSample.git`
+
+    `git clone git@github.com:foursquare/RNPilgrimSample.git`
     
 2. In sample app directory install dependencies
-    * `npm install`
+
+    `npm install`
 
 3. Autolink native modules (react-native 0.60+)
-    * `cd ios/ && pod install && cd ..`
+
+    `cd ios/ && pod install && cd ..`
 
     #### iOS setup
 
