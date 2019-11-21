@@ -1,4 +1,4 @@
-# RNPilgrimSample
+# React Native Pilgrim SDK Sample App
 Pilgrim sample app using React Native
 
 |iOS                |Android                |
