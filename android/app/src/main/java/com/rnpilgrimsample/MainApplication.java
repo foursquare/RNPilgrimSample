@@ -46,7 +46,8 @@ public class MainApplication extends Application implements ReactApplication {
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this); // Remove this line if you don't want Flipper enabled
 
-    PilgrimSdk.Builder builder = new PilgrimSdk.Builder(this).consumer("CONSUMER_KEY", "CONSUMER_SECRET");
+    PilgrimSdk.Builder builder = new PilgrimSdk.Builder(this).consumer("CONSUMER_KEY", "CONSUMER_SECRET")
+        .logLevel(LogLevel.DEBUG).enableDebugLogs();
     PilgrimSdk.with(builder);
   }
 
