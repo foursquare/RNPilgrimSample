@@ -20,7 +20,7 @@ PODS:
     - glog
   - glog (0.3.5)
   - Pilgrim (2.2.0)
-  - pilgrim-sdk-react-native (1.0.4):
+  - pilgrim-sdk-react-native (1.0.6):
     - Pilgrim (= 2.2.0)
     - React
   - RCTRequired (0.61.4)
@@ -336,7 +336,7 @@ SPEC CHECKSUMS:
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   Pilgrim: cd4d1f639618ac6e73e094848e83ef7d74cad645
-  pilgrim-sdk-react-native: 4706b91e25287a79233f225c59db22c2240ba073
+  pilgrim-sdk-react-native: 2008aeb4e7e1517227865e1537c62cabed106235
   RCTRequired: f3b3fb6f4723e8e52facb229d0c75fdc76773849
   RCTTypeSafety: 2ec60de6abb1db050b56ecc4b60188026078fd10
   React: 10e0130b57e55a7cd8c3dee37c1261102ce295f4
