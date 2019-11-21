@@ -1,13 +1,9 @@
 # RNPilgrimSample
 Pilgrim sample app using React Native
 
-### iOS:
-
-![](images/ios.gif)
-
-### Android:
-
-![](images/android.gif)
+|iOS                |Android                |
+|-------------------|----------------------:|
+|![](images/ios.gif)|![](images/android.gif)|
 
 ## Setup instructions
 
@@ -24,13 +20,13 @@ Pilgrim sample app using React Native
 
     1. Ensure `CFBundleIdentifier` is set correctly
 
-    2. Replace `CONSUMER_KEY` and `CONSUMER_SECRET` with correct values in `ios/RNPilgrimSample/AppDelegate.m`
+    2. Replace `CONSUMER_KEY` and `CONSUMER_SECRET` with the correct values in `ios/RNPilgrimSample/AppDelegate.m`
 
     #### Android setup
 
-    1. Replace `CONSUMER_KEY` and `CONSUMER_SECRET` with correct values in `android/app/src/main/java/com/rnpilgrimsample/MainApplication.java`
+    1. Replace `CONSUMER_KEY` and `CONSUMER_SECRET` with the correct values in `android/app/src/main/java/com/rnpilgrimsample/MainApplication.java`
 
-    2. In `android/app/build.gradle` modify the `signingConfigs` to use your keystore file and ensure the `storePassword`, `keyAlias`, and `keyPassword` are set correctly
+    2. In `android/app/build.gradle` modify the `signingConfigs` section to use your keystore file and ensure the `storePassword`, `keyAlias`, and `keyPassword` are set correctly
 
     ```
     signingConfigs {
@@ -48,5 +44,5 @@ Pilgrim sample app using React Native
 4. Run the app
 
     `npx react-native run-ios`
-    
+
     `npx react-native run-android`
