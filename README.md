@@ -75,7 +75,7 @@ Use of this sample app requires a Pilgrim enabled account from (https://develope
 
 2. See an "Access Credentials Missing" error? This happens for two reasons:
 
-    i. You have forgotten to add or added incorrect Pilgrim enabled Foursquare `CONSUMER_KEY` and `CONSUMER_SECRET` correctly, or
+    i. You have forgotten to add or added invalid Pilgrim enabled Foursquare `CONSUMER_KEY` and `CONSUMER_SECRET` to your React Native project (iOS step 5 or Android step 4), or
     
-    ii. You have forgotten to add or added incorrect Bundle ID (iOS) or Key Hashes (Android) to your Foursquare account's settings.
+    ii. You have forgotten to add or added the wrong Bundle ID (iOS) or Key Hashes (Android) to your Foursquare account's settings (iOS step 6 or Android step 5).
 
