@@ -34,10 +34,10 @@ Use of this sample app requires a Pilgrim enabled account from (https://develope
 
     `cd ios/ && pod install && cd ..`
 
-5. In `ios/RNPilgrimSample/AppDelegate.m`, replace `CONSUMER_KEY` and `CONSUMER_SECRET` with the values of your Foursquare App, found in your [Foursquare Developer Console](https://foursquare.com/developers/apps/):
+5. In `ios/RNPilgrimSample/AppDelegate.m`, replace `CONSUMER_KEY` and `CONSUMER_SECRET` with the values of your Foursquare app, found in your [Foursquare Developer Console](https://foursquare.com/developers/apps/).
 
 
-6. Ensure the `CFBundleIdentifier` of your project's `Info.plist` is correctly added to your Foursquare App's [Developer Console](https://foursquare.com/developers/apps/)'s iOS Bundle IDs setting. This is located in your  https://foursquare.com/developers/apps/__CONSUMER_KEY__
+6. Ensure the `CFBundleIdentifier` of your project's `Info.plist` is correctly added to your Foursquare [Developer Console](https://foursquare.com/developers/apps/) app's iOS Bundle IDs setting.
 
 7. Run the app:
 
@@ -47,7 +47,7 @@ Use of this sample app requires a Pilgrim enabled account from (https://develope
 
 ### Android Setup
 
-4. In `android/app/src/main/java/com/rnpilgrimsample/MainApplication.java`, replace `CONSUMER_KEY` and `CONSUMER_SECRET` with the values of your Foursquare App, found in your [Foursquare Developer Console](https://developer.foursquare.com):
+4. In `android/app/src/main/java/com/rnpilgrimsample/MainApplication.java`, replace `CONSUMER_KEY` and `CONSUMER_SECRET` with the values of your Foursquare App, found in your [Foursquare Developer Console](https://developer.foursquare.com).
 
 5. In `android/app/build.gradle` modify the `signingConfigs` section to use your keystore file and ensure the `storePassword`, `keyAlias`, and `keyPassword` are set correctly
 
@@ -74,6 +74,7 @@ Use of this sample app requires a Pilgrim enabled account from (https://develope
 1. If you are using the simulator, make sure you set the simulator's location. Using a [GPX file](https://www.gpxgenerator.com/) should also help, as simulating location can be notoriously tricky.
 
 2. See an "Access Credentials Missing" error? This happens for two reasons:
+
     i. You have forgotten to add or added incorrect Pilgrim enabled Foursquare `CONSUMER_KEY` and `CONSUMER_SECRET` correctly, or
     ii. You have forgotten to add or added incorrect Bundle ID (iOS) or Key Hashes (Android) to your Foursquare account's settings.
 
