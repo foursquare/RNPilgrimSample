@@ -76,5 +76,6 @@ Use of this sample app requires a Pilgrim enabled account from (https://develope
 2. See an "Access Credentials Missing" error? This happens for two reasons:
 
     i. You have forgotten to add or added incorrect Pilgrim enabled Foursquare `CONSUMER_KEY` and `CONSUMER_SECRET` correctly, or
+    
     ii. You have forgotten to add or added incorrect Bundle ID (iOS) or Key Hashes (Android) to your Foursquare account's settings.
 
