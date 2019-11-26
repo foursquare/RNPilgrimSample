@@ -37,7 +37,7 @@ Use of this sample app requires a Pilgrim enabled account from (https://develope
 5. In `ios/RNPilgrimSample/AppDelegate.m`, replace `CONSUMER_KEY` and `CONSUMER_SECRET` with the values of your Foursquare app, found in your [Foursquare Developer Console](https://foursquare.com/developers/apps/).
 
 
-6. Ensure the `CFBundleIdentifier` of your project's `Info.plist` is correctly added to your Foursquare [Developer Console](https://foursquare.com/developers/apps/) app's iOS Bundle IDs setting.
+6. Ensure the `CFBundleIdentifier` of your project's `Info.plist` is correctly added to your Foursquare [Developer Console](https://foursquare.com/developers/apps/) app's iOS Bundle IDs setting. For more details on how to set this up, please refer to Pilgrim's [iOS Getting Started Guide](https://developer.foursquare.com/docs/pilgrim-sdk/ios#register-your-apps-bundle-ids).
 
 7. Run the app:
 
@@ -61,6 +61,8 @@ Use of this sample app requires a Pilgrim enabled account from (https://develope
         }
     }
     ```
+    
+    For more details on how to set this up, please refer to Pilgrim's [Android Getting Started Guide](https://developer.foursquare.com/docs/pilgrim-sdk/android#register-your-apps-key-hashes).
 
 6. (Optional) For the map view to work you need to add your [Google API Key](https://developers.google.com/maps/documentation/android-sdk/get-api-key) in `android/app/src/main/AndroidManifest.xml`.  Replace `YOUR_API_KEY` with the correct value.
 
