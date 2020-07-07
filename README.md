@@ -41,7 +41,7 @@ Use of this sample app requires a Pilgrim enabled account from (https://develope
 
 7. Run the app:
 
-    `npx react-native run-ios`
+    `npm run ios`
 
 
 
@@ -68,7 +68,7 @@ Use of this sample app requires a Pilgrim enabled account from (https://develope
 
 7. Run the app:
 
-    `npx react-native run-android`
+    `npm run android`
 
 
 ## Common Issues
