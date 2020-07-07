@@ -9,15 +9,28 @@ import {
   Text,
   View,
 } from 'react-native';
-import PilgrimSdk from '@foursquare/pilgrim-sdk-react-native';
+import PilgrimSdk, {
+  CurrentLocation,
+  GeofenceEvent,
+} from '@foursquare/pilgrim-sdk-react-native';
 import MapView, {Marker} from 'react-native-maps';
+import {StackScreenProps} from '@react-navigation/stack';
 
-function Item({geofenceEvent}) {
-  const venue = geofenceEvent.venue;
-  if (venue !== undefined) {
+interface GetCurrentLocationState {
+  currentLocation?: CurrentLocation;
+}
+
+interface ItemProps {
+  geofenceEvent: GeofenceEvent;
+}
+
+function Item(props: ItemProps): JSX.Element {
+  const venue = props.geofenceEvent.venue;
+  if (venue) {
     const locationInformation = venue.locationInformation;
     const category = venue.categories[0];
-    const icon = category.icon.prefix + '88' + category.icon.suffix;
+    const icon = category?.icon;
+    const uri = icon ? icon.prefix + '88' + icon.suffix : null;
     return (
       <View>
         <View style={{flexDirection: 'row'}}>
@@ -28,14 +41,17 @@ function Item({geofenceEvent}) {
               backgroundColor: '#CCC',
               marginRight: 5,
             }}
-            source={{uri: icon}}
+            source={{uri: uri || undefined}}
           />
-          <Text style={styles.geofenceTitle}>{geofenceEvent.name}</Text>
+          <Text style={styles.geofenceTitle}>{props.geofenceEvent.name}</Text>
         </View>
-        <Text style={styles.geofenceData}>{locationInformation.address}</Text>
         <Text style={styles.geofenceData}>
-          {locationInformation.city}, {locationInformation.state}{' '}
-          {locationInformation.postalCode}
+          {locationInformation?.address || 'Unknown Address'}
+        </Text>
+        <Text style={styles.geofenceData}>
+          {locationInformation?.city || 'Unknown City'},{' '}
+          {locationInformation?.state || 'Unknown State'}{' '}
+          {locationInformation?.postalCode || 'Unknown Zip'}
         </Text>
       </View>
     );
@@ -43,32 +59,29 @@ function Item({geofenceEvent}) {
     return (
       <View>
         <View style={{flexDirection: 'row'}}>
-          <Text style={styles.geofenceTitle}>{geofenceEvent.name}</Text>
+          <Text style={styles.geofenceTitle}>{props.geofenceEvent.name}</Text>
         </View>
       </View>
     );
   }
 }
 
-export default class GetCurrentLocationScreen extends Component {
-  static navigationOptions = {
-    title: 'Get Current Location',
-  };
+export default class GetCurrentLocationScreen extends Component<
+  StackScreenProps<{}>,
+  GetCurrentLocationState
+> {
+  state: GetCurrentLocationState = {};
 
-  state = {
-    currentLocation: null,
-  };
-
-  getCurrentLocation = async function() {
+  private async getCurrentLocation() {
     try {
       const currentLocation = await PilgrimSdk.getCurrentLocation();
       this.setState({currentLocation: currentLocation});
     } catch (e) {
       Alert.alert('Pilgrim SDK', `${e}`);
     }
-  };
+  }
 
-  confidenceString = function(confidence) {
+  private confidenceString(confidence: number) {
     switch (confidence) {
       case 0:
         return 'None';
@@ -79,9 +92,9 @@ export default class GetCurrentLocationScreen extends Component {
       case 3:
         return 'High';
     }
-  };
+  }
 
-  locationTypeString = function(locationType) {
+  private locationTypeString(locationType: number) {
     switch (locationType) {
       case 0:
         return 'Unknown';
@@ -92,39 +105,42 @@ export default class GetCurrentLocationScreen extends Component {
       case 3:
         return 'Venue';
     }
-  };
+  }
 
   componentDidMount() {
     this.getCurrentLocation();
   }
 
-  render() {
+  render(): JSX.Element {
     const currentLocation = this.state.currentLocation;
     let currentLocationMapView;
     let currentLocationDataView;
 
-    if (currentLocation != null) {
-      const visit = currentLocation.currentPlace;
+    const visit = currentLocation?.currentPlace;
+    if (visit) {
       const venue = visit.venue;
-      const matchedGeofences = currentLocation.matchedGeofences;
+      const location = visit.location;
+      const matchedGeofences = currentLocation?.matchedGeofences || [];
 
-      currentLocationMapView = (
-        <MapView
-          style={{flex: 1}}
-          region={{
-            latitude: visit.location.latitude,
-            longitude: visit.location.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
-          }}>
-          <Marker coordinate={visit.location} />
-        </MapView>
-      );
+      if (location) {
+        currentLocationMapView = (
+          <MapView
+            style={{flex: 1}}
+            region={{
+              latitude: location.latitude,
+              longitude: location.longitude,
+              latitudeDelta: 0.01,
+              longitudeDelta: 0.01,
+            }}>
+            <Marker coordinate={location} />
+          </MapView>
+        );
+      }
 
-      if (venue != undefined) {
+      if (venue !== undefined) {
         const locationInformation = venue.locationInformation;
-        const category = venue.categories[0];
-        const icon = category.icon.prefix + '88' + category.icon.suffix;
+        const icon = venue.categories[0]?.icon;
+        const uri = icon ? icon.prefix + '88' + icon.suffix : null;
         currentLocationDataView = (
           <View style={{flex: 1}}>
             <View style={{paddingVertical: 20}}>
@@ -136,18 +152,19 @@ export default class GetCurrentLocationScreen extends Component {
                     backgroundColor: '#CCC',
                     marginRight: 10,
                   }}
-                  source={{uri: icon}}
+                  source={{uri: uri || undefined}}
                 />
                 <Text style={styles.title}>
                   {venue.name || 'Unknown Venue'}
                 </Text>
               </View>
               <Text style={styles.venueData}>
-                {locationInformation.address}
+                {locationInformation?.address || 'Unknown Address'}
               </Text>
               <Text style={styles.venueData}>
-                {locationInformation.city}, {locationInformation.state}{' '}
-                {locationInformation.postalCode}
+                {locationInformation?.city || ''},{' '}
+                {locationInformation?.state || 'Unknown State'}{' '}
+                {locationInformation?.postalCode || 'Unknown Zip'}
               </Text>
               <Text style={styles.venueData}>
                 Confidence: {this.confidenceString(visit.confidence)}
@@ -158,7 +175,7 @@ export default class GetCurrentLocationScreen extends Component {
               <FlatList
                 data={matchedGeofences}
                 renderItem={({item}) => <Item geofenceEvent={item} />}
-                keyExtractor={item => item.id}
+                keyExtractor={(item) => item.id}
               />
             </View>
           </View>
@@ -181,7 +198,7 @@ export default class GetCurrentLocationScreen extends Component {
               <FlatList
                 data={matchedGeofences}
                 renderItem={({item}) => <Item geofenceEvent={item} />}
-                keyExtractor={item => item.id}
+                keyExtractor={(item) => item.id}
               />
             </View>
           </View>

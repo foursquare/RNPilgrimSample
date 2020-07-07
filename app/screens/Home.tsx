@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {
   Alert,
   Button,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   StatusBar,
@@ -11,38 +10,51 @@ import {
 } from 'react-native';
 import RNLocation from 'react-native-location';
 import PilgrimSdk from '@foursquare/pilgrim-sdk-react-native';
+import {StackScreenProps} from '@react-navigation/stack';
+import {RootStackParamList} from '../App';
 
-export default class HomeScreen extends Component {
-  static navigationOptions = {
-    title: 'Pilgrim React Native Sample',
-  };
+interface HomeState {
+  installId: string;
+}
 
-  state = {
+type HomePropsProps = StackScreenProps<RootStackParamList, 'Home'>;
+
+export default class HomeScreen extends Component<HomePropsProps, HomeState> {
+  state: HomeState = {
     installId: '-',
   };
 
   componentDidMount() {
-    RNLocation.requestPermission({
+    this.requestLocationPermission();
+    this.setInstallId();
+  }
+
+  private async requestLocationPermission() {
+    const granted = await RNLocation.requestPermission({
       ios: 'always',
       android: {
         detail: 'fine',
       },
-    }).then(granted => {
-      if (!granted) {
-        Alert.alert(
-          'Pilgrim SDK',
-          'Location permission is required please enable in Settings',
-        );
-      }
     });
-    PilgrimSdk.getInstallId().then(installId => {
-      this.setState({installId: installId});
-    });
+    if (!granted) {
+      Alert.alert(
+        'Pilgrim SDK',
+        'Location permission is required please enable in Settings',
+      );
+    }
   }
 
-  fireTestVisit = async function() {
+  private async setInstallId() {
+    const installId = await PilgrimSdk.getInstallId();
+    this.setState({installId: installId});
+  }
+
+  private async fireTestVisit() {
     try {
       const location = await RNLocation.getLatestLocation();
+      if (!location) {
+        return;
+      }
       const latitude = location.latitude;
       const longitude = location.longitude;
       PilgrimSdk.fireTestVisit(latitude, longitude);
@@ -53,9 +65,9 @@ export default class HomeScreen extends Component {
     } catch (e) {
       Alert.alert('Pilgrim SDK', `${e.message}`);
     }
-  };
+  }
 
-  startPilgrim = async function() {
+  private async startPilgrim() {
     const canEnable = await PilgrimSdk.canEnable();
     const isSupportedDevice = await PilgrimSdk.isSupportedDevice();
     if (canEnable && isSupportedDevice) {
@@ -64,19 +76,18 @@ export default class HomeScreen extends Component {
     } else {
       Alert.alert('Pilrim SDK', 'Error starting');
     }
-  };
+  }
 
-  stopPilgrim = function() {
+  private async stopPilgrim() {
     PilgrimSdk.stop();
     Alert.alert('Pilrim SDK', 'Pilgrim stopped');
-  };
+  }
 
-  showDebugScreen = function() {
+  private async showDebugScreen() {
     PilgrimSdk.showDebugScreen();
-  };
+  }
 
-  render() {
-    const {navigate} = this.props.navigation;
+  render(): JSX.Element {
     return (
       <>
         <StatusBar barStyle="dark-content" />
@@ -84,7 +95,7 @@ export default class HomeScreen extends Component {
           <Button
             title="Get Current Location"
             onPress={() => {
-              navigate('GetCurrentLocation');
+              this.props.navigation.navigate('GetCurrentLocation');
             }}
           />
           <View style={styles.separator} />
