@@ -464,13 +464,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RNPilgrimSample-RNPilgrimSampleTests/Pods-RNPilgrimSample-RNPilgrimSampleTests-frameworks.sh",
-				"${PODS_ROOT}/Pilgrim/Pilgrim-2.2.1/Pilgrim.framework",
-				"${PODS_ROOT}/Pilgrim/Pilgrim-2.2.1/Pilgrim.framework.dSYM",
+				"${PODS_ROOT}/Pilgrim/Pilgrim-2.4.0/Pilgrim.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pilgrim.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/Pilgrim.framework.dSYM",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -506,13 +506,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RNPilgrimSample/Pods-RNPilgrimSample-frameworks.sh",
-				"${PODS_ROOT}/Pilgrim/Pilgrim-2.2.1/Pilgrim.framework",
-				"${PODS_ROOT}/Pilgrim/Pilgrim-2.2.1/Pilgrim.framework.dSYM",
+				"${PODS_ROOT}/Pilgrim/Pilgrim-2.4.0/Pilgrim.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pilgrim.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/Pilgrim.framework.dSYM",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
