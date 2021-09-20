@@ -68,14 +68,8 @@ export default class HomeScreen extends Component<HomePropsProps, HomeState> {
   }
 
   private async startPilgrim() {
-    const canEnable = await PilgrimSdk.canEnable();
-    const isSupportedDevice = await PilgrimSdk.isSupportedDevice();
-    if (canEnable && isSupportedDevice) {
-      PilgrimSdk.start();
-      Alert.alert('Pilrim SDK', 'Pilgrim started');
-    } else {
-      Alert.alert('Pilrim SDK', 'Error starting');
-    }
+    PilgrimSdk.start();
+    Alert.alert('Pilrim SDK', 'Pilgrim started');
   }
 
   private async stopPilgrim() {

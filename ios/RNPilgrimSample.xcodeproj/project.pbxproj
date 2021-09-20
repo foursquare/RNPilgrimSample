@@ -161,7 +161,6 @@
 				F4EA6ED84D40E88BD4EAEC1C /* Pods-RNPilgrimSample-tvOSTests.debug.xcconfig */,
 				E104FE08BF50CAE0EB56273C /* Pods-RNPilgrimSample-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -464,8 +463,8 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RNPilgrimSample-RNPilgrimSampleTests/Pods-RNPilgrimSample-RNPilgrimSampleTests-frameworks.sh",
-				"${PODS_ROOT}/Pilgrim/Pilgrim-2.4.0/Pilgrim.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
+				"${PODS_ROOT}/Pilgrim/Pilgrim-3.0.1/Pilgrim.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -506,8 +505,8 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RNPilgrimSample/Pods-RNPilgrimSample-frameworks.sh",
-				"${PODS_ROOT}/Pilgrim/Pilgrim-2.4.0/Pilgrim.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
+				"${PODS_ROOT}/Pilgrim/Pilgrim-3.0.1/Pilgrim.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -684,7 +683,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.foursquare.swiftsure;
 				PRODUCT_NAME = RNPilgrimSample;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -706,7 +705,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.foursquare.swiftsure;
 				PRODUCT_NAME = RNPilgrimSample;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
