@@ -463,8 +463,8 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RNPilgrimSample-RNPilgrimSampleTests/Pods-RNPilgrimSample-RNPilgrimSampleTests-frameworks.sh",
-				"${PODS_ROOT}/Pilgrim/Pilgrim-3.0.1/Pilgrim.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+				"${PODS_ROOT}/Pilgrim/Pilgrim-2.4.0/Pilgrim.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -505,8 +505,8 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RNPilgrimSample/Pods-RNPilgrimSample-frameworks.sh",
-				"${PODS_ROOT}/Pilgrim/Pilgrim-3.0.1/Pilgrim.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+				"${PODS_ROOT}/Pilgrim/Pilgrim-2.4.0/Pilgrim.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
