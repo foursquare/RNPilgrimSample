@@ -161,7 +161,6 @@
 				F4EA6ED84D40E88BD4EAEC1C /* Pods-RNPilgrimSample-tvOSTests.debug.xcconfig */,
 				E104FE08BF50CAE0EB56273C /* Pods-RNPilgrimSample-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
