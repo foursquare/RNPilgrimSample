@@ -84,7 +84,7 @@ PODS:
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
   - Pilgrim (3.0.1)
-  - pilgrim-sdk-react-native (1.0.13):
+  - pilgrim-sdk-react-native (1.1.0):
     - Pilgrim (= 3.0.1)
     - React
   - RCTRequired (0.62.2)
@@ -492,7 +492,7 @@ SPEC CHECKSUMS:
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   Pilgrim: 149735d5ac44d3958dc989a1e08554f30337e53f
-  pilgrim-sdk-react-native: 54006086664dfbd58a8f750529448097d41d81a3
+  pilgrim-sdk-react-native: 6d90a353d5084b04ba44543f0a220a2d3c28e320
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
   React: 29a8b1a02bd764fb7644ef04019270849b9a7ac3
