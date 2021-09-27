@@ -18,8 +18,6 @@
 		2DCD954D1E0B4F2C00145EB5 /* RNPilgrimSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RNPilgrimSampleTests.m */; };
 		3EC43F8D36802F1B299F4015 /* libPods-RNPilgrimSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B234F8CD14BB920C3F22A7 /* libPods-RNPilgrimSample.a */; };
 		68F824349BDF95488A50228B /* libPods-RNPilgrimSample-RNPilgrimSampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 970156F4C52392A902FA5EC0 /* libPods-RNPilgrimSample-RNPilgrimSampleTests.a */; };
-		981803703B1B50D5640E9ACA /* libPods-RNPilgrimSample-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E61C8609AC2D7DAB978CC1F5 /* libPods-RNPilgrimSample-tvOS.a */; };
-		D745C52E68991A80F4A5A81D /* libPods-RNPilgrimSample-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D36B2FD04A77C8B8887E4D5D /* libPods-RNPilgrimSample-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,17 +54,11 @@
 		2D02E47B1E0B4A5D006451C7 /* RNPilgrimSample-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RNPilgrimSample-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* RNPilgrimSample-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RNPilgrimSample-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39BBFF8519DA05F75366B928 /* Pods-RNPilgrimSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNPilgrimSample.release.xcconfig"; path = "Target Support Files/Pods-RNPilgrimSample/Pods-RNPilgrimSample.release.xcconfig"; sourceTree = "<group>"; };
-		3A7CEFBF80FBFFB6195D3E0B /* Pods-RNPilgrimSample-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNPilgrimSample-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-RNPilgrimSample-tvOS/Pods-RNPilgrimSample-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		6C09AFFAE094A3ED1A11A92E /* Pods-RNPilgrimSample-RNPilgrimSampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNPilgrimSample-RNPilgrimSampleTests.release.xcconfig"; path = "Target Support Files/Pods-RNPilgrimSample-RNPilgrimSampleTests/Pods-RNPilgrimSample-RNPilgrimSampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		970156F4C52392A902FA5EC0 /* libPods-RNPilgrimSample-RNPilgrimSampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNPilgrimSample-RNPilgrimSampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33076CBD298BD21F17A7D44 /* Pods-RNPilgrimSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNPilgrimSample.debug.xcconfig"; path = "Target Support Files/Pods-RNPilgrimSample/Pods-RNPilgrimSample.debug.xcconfig"; sourceTree = "<group>"; };
-		D36B2FD04A77C8B8887E4D5D /* libPods-RNPilgrimSample-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNPilgrimSample-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E104FE08BF50CAE0EB56273C /* Pods-RNPilgrimSample-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNPilgrimSample-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-RNPilgrimSample-tvOSTests/Pods-RNPilgrimSample-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		E169E5519F60F67B39A854C9 /* Pods-RNPilgrimSample-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNPilgrimSample-tvOS.release.xcconfig"; path = "Target Support Files/Pods-RNPilgrimSample-tvOS/Pods-RNPilgrimSample-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		E61C8609AC2D7DAB978CC1F5 /* libPods-RNPilgrimSample-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNPilgrimSample-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F4EA6ED84D40E88BD4EAEC1C /* Pods-RNPilgrimSample-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNPilgrimSample-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-RNPilgrimSample-tvOSTests/Pods-RNPilgrimSample-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +82,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				981803703B1B50D5640E9ACA /* libPods-RNPilgrimSample-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +89,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D745C52E68991A80F4A5A81D /* libPods-RNPilgrimSample-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,8 +133,6 @@
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				29B234F8CD14BB920C3F22A7 /* libPods-RNPilgrimSample.a */,
 				970156F4C52392A902FA5EC0 /* libPods-RNPilgrimSample-RNPilgrimSampleTests.a */,
-				E61C8609AC2D7DAB978CC1F5 /* libPods-RNPilgrimSample-tvOS.a */,
-				D36B2FD04A77C8B8887E4D5D /* libPods-RNPilgrimSample-tvOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -156,10 +144,6 @@
 				39BBFF8519DA05F75366B928 /* Pods-RNPilgrimSample.release.xcconfig */,
 				1253893AFEB50B22D60EEFE4 /* Pods-RNPilgrimSample-RNPilgrimSampleTests.debug.xcconfig */,
 				6C09AFFAE094A3ED1A11A92E /* Pods-RNPilgrimSample-RNPilgrimSampleTests.release.xcconfig */,
-				3A7CEFBF80FBFFB6195D3E0B /* Pods-RNPilgrimSample-tvOS.debug.xcconfig */,
-				E169E5519F60F67B39A854C9 /* Pods-RNPilgrimSample-tvOS.release.xcconfig */,
-				F4EA6ED84D40E88BD4EAEC1C /* Pods-RNPilgrimSample-tvOSTests.debug.xcconfig */,
-				E104FE08BF50CAE0EB56273C /* Pods-RNPilgrimSample-tvOSTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -209,6 +193,7 @@
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
 				AE7C4DD6BF26897F2A639A9E /* [CP] Embed Pods Frameworks */,
+				1391FE4C3CD7750FC88C25E8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,6 +216,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				F8DB792017356BD6D07FB5F4 /* [CP] Embed Pods Frameworks */,
+				8596BD441EA960FA42AA218B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -245,7 +231,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "RNPilgrimSample-tvOS" */;
 			buildPhases = (
-				E4B48B69544AB1ADA287B7F3 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -265,7 +250,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "RNPilgrimSample-tvOSTests" */;
 			buildPhases = (
-				039E9132ADABB5D9214590A8 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -398,26 +382,22 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		039E9132ADABB5D9214590A8 /* [CP] Check Pods Manifest.lock */ = {
+		1391FE4C3CD7750FC88C25E8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+				"${PODS_ROOT}/Target Support Files/Pods-RNPilgrimSample-RNPilgrimSampleTests/Pods-RNPilgrimSample-RNPilgrimSampleTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RNPilgrimSample-tvOSTests-checkManifestLockResult.txt",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNPilgrimSample-RNPilgrimSampleTests/Pods-RNPilgrimSample-RNPilgrimSampleTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
@@ -456,6 +436,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8596BD441EA960FA42AA218B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RNPilgrimSample/Pods-RNPilgrimSample-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNPilgrimSample/Pods-RNPilgrimSample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		AE7C4DD6BF26897F2A639A9E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -463,39 +461,19 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RNPilgrimSample-RNPilgrimSampleTests/Pods-RNPilgrimSample-RNPilgrimSampleTests-frameworks.sh",
-				"${PODS_ROOT}/Pilgrim/Pilgrim-2.4.0/Pilgrim.framework",
+				"${PODS_ROOT}/Pilgrim/Pilgrim-3.0.1/Pilgrim.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flipper-DoubleConversion/double-conversion.framework/double-conversion",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pilgrim.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/double-conversion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNPilgrimSample-RNPilgrimSampleTests/Pods-RNPilgrimSample-RNPilgrimSampleTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E4B48B69544AB1ADA287B7F3 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RNPilgrimSample-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F8DB792017356BD6D07FB5F4 /* [CP] Embed Pods Frameworks */ = {
@@ -505,12 +483,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-RNPilgrimSample/Pods-RNPilgrimSample-frameworks.sh",
-				"${PODS_ROOT}/Pilgrim/Pilgrim-2.4.0/Pilgrim.framework",
+				"${PODS_ROOT}/Pilgrim/Pilgrim-3.0.1/Pilgrim.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flipper-DoubleConversion/double-conversion.framework/double-conversion",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pilgrim.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/double-conversion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -714,7 +694,6 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A7CEFBF80FBFFB6195D3E0B /* Pods-RNPilgrimSample-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -742,7 +721,6 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E169E5519F60F67B39A854C9 /* Pods-RNPilgrimSample-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -770,7 +748,6 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4EA6ED84D40E88BD4EAEC1C /* Pods-RNPilgrimSample-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -797,7 +774,6 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E104FE08BF50CAE0EB56273C /* Pods-RNPilgrimSample-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -854,6 +830,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -914,6 +891,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
