@@ -9,6 +9,8 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.soloader.SoLoader;
+import com.foursquare.pilgrim.LogLevel;
+import com.foursquare.pilgrim.PilgrimSdk;
 import com.rnpilgrimsample.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -56,6 +58,10 @@ public class MainApplication extends Application implements ReactApplication {
     ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+
+      PilgrimSdk.Builder builder = new PilgrimSdk.Builder(this).consumer("CONSUMER_KEY", "CONSUMER_SECRET")
+              .logLevel(LogLevel.DEBUG).enableDebugLogs();
+      PilgrimSdk.with(builder);
   }
 
   /**

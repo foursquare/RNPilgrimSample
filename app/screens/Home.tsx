@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 20,
     fontSize: 13,
+    color: 'black',
   },
   separator: {
     height: 20,

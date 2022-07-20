@@ -240,15 +240,19 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     lineHeight: 50,
+    color: 'black',
   },
   venueData: {
     fontSize: 18,
+    color: 'black',
   },
   geofenceTitle: {
     fontSize: 15,
     lineHeight: 25,
+    color: 'black',
   },
   geofenceData: {
     fontSize: 15,
+    color: 'black',
   },
 });

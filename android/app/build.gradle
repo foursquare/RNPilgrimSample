@@ -284,6 +284,8 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    compileOnly 'com.foursquare:pilgrimsdk:3.1.0'
 }
 
 if (isNewArchitectureEnabled()) {
