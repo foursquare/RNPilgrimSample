@@ -49,7 +49,6 @@ export default class HomeScreen extends Component<HomePropsProps, HomeState> {
           detail: 'fine',
         },
       });
-      console.log(granted);
       if (!granted) {
         alertPermissionError();
       }
