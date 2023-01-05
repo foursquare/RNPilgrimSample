@@ -15,6 +15,7 @@ import {RootStackParamList} from '../App';
 
 interface HomeState {
   installId: string;
+  isEnabled: boolean;
 }
 
 type HomePropsProps = StackScreenProps<RootStackParamList, 'Home'>;
@@ -22,11 +23,13 @@ type HomePropsProps = StackScreenProps<RootStackParamList, 'Home'>;
 export default class HomeScreen extends Component<HomePropsProps, HomeState> {
   state: HomeState = {
     installId: '-',
+    isEnabled: false,
   };
 
   componentDidMount() {
     this.requestLocationPermission();
     this.setInstallId();
+    this.setIsEnabled();
   }
 
   private async requestLocationPermission() {
@@ -62,6 +65,19 @@ export default class HomeScreen extends Component<HomePropsProps, HomeState> {
     this.setState({installId: installId});
   }
 
+  private async setIsEnabled() {
+    const isEnabled = await PilgrimSdk.isEnabled();
+    this.setState({isEnabled: isEnabled});
+  }
+
+  private getEnabledText() {
+    if (this.state.isEnabled) {
+      return 'Yes';
+    } else {
+      return 'No';
+    }
+  }
+
   private async fireTestVisit() {
     try {
       const location = await RNLocation.getLatestLocation();
@@ -82,12 +98,12 @@ export default class HomeScreen extends Component<HomePropsProps, HomeState> {
 
   private async startPilgrim() {
     PilgrimSdk.start();
-    Alert.alert('Pilrim SDK', 'Pilgrim started');
+    this.setIsEnabled();
   }
 
   private async stopPilgrim() {
     PilgrimSdk.stop();
-    Alert.alert('Pilrim SDK', 'Pilgrim stopped');
+    this.setIsEnabled();
   }
 
   private async showDebugScreen() {
@@ -134,9 +150,8 @@ export default class HomeScreen extends Component<HomePropsProps, HomeState> {
             }}
           />
           <View style={styles.separator} />
-          <Text style={styles.installId}>
-            Install ID: {this.state.installId}
-          </Text>
+          <Text style={styles.footer}>Install ID: {this.state.installId}</Text>
+          <Text style={styles.footer}>Enabled: {this.getEnabledText()}</Text>
         </ScrollView>
       </>
     );
@@ -148,9 +163,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
   },
-  installId: {
+  footer: {
     textAlign: 'center',
-    padding: 20,
+    padding: 10,
     fontSize: 13,
     color: 'black',
   },
